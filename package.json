@@ -6,9 +6,9 @@
   },
   "scripts": {
   "dev": "npm run dev --prefix frontend & npm run dev --prefix backend", 
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite"
+  "build": "npm run build --prefix frontend & npm run build --prefix backend",  
+ "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist"
   }
 
 }
