@@ -1,0 +1,195 @@
+/* Carousel 2D Full Image Display */
+.carousel-container {
+  width: 100%;
+  max-width: 1200px;
+  height: 600px;
+  margin: 40px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  background: rgba(10, 15, 30, 0.4);
+  border-radius: 30px;
+  box-shadow: 
+    0 15px 45px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  transition: border-color 0.4s ease;
+}
+
+.carousel-container:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.carousel-display {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 40px; /* Padding for the image to 'breathe' */
+}
+
+.carousel-active-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+.carousel-main-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Ensure certificates are fully visible without cropping */
+  border-radius: 12px;
+  box-shadow: 
+    0 15px 50px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.carousel-main-image:hover {
+  transform: scale(1.02);
+}
+
+/* Placeholder card when image is missing */
+.card-placeholder {
+  width: 400px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.item-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #3b82f6;
+  margin-bottom: 10px;
+}
+
+/* Dots Navigation */
+.carousel-dots-container {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 20;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.carousel-dot.active {
+  background: #3b82f6;
+  width: 24px;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.7);
+}
+
+/* Pause Indicator */
+.pause-indicator {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(239, 68, 68, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 20px;
+  z-index: 30;
+  color: #ef4444;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pause-indicator.show {
+  display: flex;
+  animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pause-text { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px; }
+
+/* Progress Bar at Top */
+.carousel-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6);
+  z-index: 40;
+  width: 0%;
+  animation: progressPulse 10s linear infinite;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.carousel-container.paused::before {
+  animation-play-state: paused;
+}
+
+@keyframes progressPulse {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* Interaction Hint */
+.carousel-hint {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.7rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .carousel-container { height: 480px; border-radius: 24px; }
+  .carousel-display { padding: 30px; }
+}
+
+@media (max-width: 480px) {
+  .carousel-container { height: 380px; padding: 0 12px; border-radius: 20px; }
+  .carousel-display { padding: 20px; }
+  .carousel-dots-container { bottom: 20px; }
+}

@@ -1,0 +1,46 @@
+.hero-3d-wrapper {
+  width: 360px;
+  max-width: 42vw;
+  height: auto;
+  display: block;
+  perspective: 1400px;
+  margin: 0 auto;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.hero-3d-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(8, 24, 50, 0.45), inset 0 1px 2px rgba(255,255,255,0.03);
+  transform-origin: center center;
+  will-change: transform;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.hero-3d-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(100,150,255,0.08), transparent 30%);
+  filter: blur(24px);
+  opacity: 0.9;
+  z-index: -1;
+}
+
+@media (max-width: 768px) {
+  .hero-3d-wrapper { max-width: 70vw; }
+  .hero-3d-img { border-radius: 18px; }
+}
+
+@media (max-width: 480px) {
+  .hero-3d-wrapper { max-width: 92vw; }
+  .hero-3d-img { border-radius: 14px; }
+  .hero-3d-glow { display: none; }
+}

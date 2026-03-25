@@ -4,6 +4,8 @@ import { Send, Terminal, Database, Code, Cpu, Globe, Mail, Phone, MapPin, Award,
 import './App.css';
 
 import heroIllustration from './assets/hero_illustration.png';
+import Carousel3D from './components/Carousel3D';
+import Hero3D from './components/Hero3D';
 
 const App = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -69,7 +71,7 @@ const App = () => {
               transition={{ duration: 0.8 }}
               className="hero-text-side"
             >
-              <motion.div 
+              <motion.div
                 className="profile-badge"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -124,14 +126,14 @@ const App = () => {
               </motion.div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
               className="hero-visual-side"
             >
               <div className="visual-wrapper">
-                <img src={heroIllustration} alt="Tech Visualization" className="hero-img" />
+                <Hero3D src={heroIllustration} alt="Tech Visualization" />
               </div>
             </motion.div>
           </div>
@@ -150,7 +152,7 @@ const App = () => {
               Professional Background
             </motion.h2>
             <div className="about-grid">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
@@ -171,7 +173,7 @@ const App = () => {
                 </div>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
@@ -188,7 +190,7 @@ const App = () => {
                   <p className="edu-location">Hyderabad, India</p>
                   <div className="edu-badge">GPA: 7.0/10.0</div>
                 </div>
-                
+
                 <div className="certifications-mini">
                   <h4>Certifications</h4>
                   <div className="cert-tags">
@@ -337,6 +339,27 @@ const App = () => {
           </div>
         </section>
 
+        {/* Gallery Carousel Section */}
+        <section id="gallery" className="gallery-section">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h2 className="section-title">Certifications</h2>
+          </motion.div>
+          <Carousel3D items={[
+            { image: "/certificates/C1.png" },
+            { image: "/certificates/C2.jpeg" },
+            { image: "/certificates/C3.jpeg" },
+            { image: "/certificates/C4.jpeg" },
+            { image: "/certificates/C5.jpeg" },
+            { image: "/certificates/C6.jpeg" }
+          ]} />
+        </section>
+
         {/* Contact Section */}
         <section id="contact" className="contact-section">
           <div className="contact-container">
@@ -384,31 +407,31 @@ const App = () => {
               <form onSubmit={handleSubmit}>
                 <div className="input-group">
                   <label>Service Inquiry</label>
-                  <input 
-                    type="text" 
-                    placeholder="Subject of discussion" 
-                    required 
+                  <input
+                    type="text"
+                    placeholder="Subject of discussion"
+                    required
                     value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})} 
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   />
                 </div>
                 <div className="input-group">
                   <label>Professional Email</label>
-                  <input 
-                    type="email" 
-                    placeholder="How can I reach you back?" 
-                    required 
+                  <input
+                    type="email"
+                    placeholder="How can I reach you back?"
+                    required
                     value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})} 
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   />
                 </div>
                 <div className="input-group">
                   <label>Message Content</label>
-                  <textarea 
-                    placeholder="Briefly describe your requirements or query..." 
-                    required 
+                  <textarea
+                    placeholder="Briefly describe your requirements or query..."
+                    required
                     value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   ></textarea>
                 </div>
                 <button type="submit" className="btn-main" disabled={status === 'loading'}>
@@ -440,8 +463,8 @@ const App = () => {
           </div>
           <div className="footer-social">
             <h4>Connect</h4>
-            <a href="https://www.linkedin.com/in/shaik-jawad-723201287/?skipRedirect=true" target="_blank" rel="noopener noreferrer" className="social-link"><Linkedin size={18}/> LinkedIn</a>
-            <a href="https://github.com/jawadshaik73" target="_blank" rel="noopener noreferrer" className="social-link"><Github size={18}/> GitHub</a>
+            <a href="https://www.linkedin.com/in/shaik-jawad-723201287/?skipRedirect=true" target="_blank" rel="noopener noreferrer" className="social-link"><Linkedin size={18} /> LinkedIn</a>
+            <a href="https://github.com/jawadshaik73" target="_blank" rel="noopener noreferrer" className="social-link"><Github size={18} /> GitHub</a>
           </div>
         </div>
         <div className="footer-bottom">
@@ -453,7 +476,7 @@ const App = () => {
 };
 
 const SkillCard = ({ icon, title, desc }) => (
-  <motion.div 
+  <motion.div
     whileHover={{ y: -5 }}
     className="skill-card-modern"
   >
@@ -464,7 +487,7 @@ const SkillCard = ({ icon, title, desc }) => (
 );
 
 const ProjectCard = ({ title, desc, tech, link }) => (
-  <motion.div 
+  <motion.div
     whileHover={{ y: -10 }}
     className="project-card"
   >
@@ -516,7 +539,7 @@ const BackgroundCanvas = () => {
     const animate = () => {
       time += 0.005;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
       gradient.addColorStop(0, '#020617');
       gradient.addColorStop(1, '#083344');
@@ -536,15 +559,15 @@ const BackgroundCanvas = () => {
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(0, 210, 255, ${p.opacity})`;
         ctx.fill();
-        
+
         // Draw lines between nearby particles
         particles.forEach(p2 => {
           const dx = p.x - p2.x;
           const dy = p.y - p2.y;
-          const dist = Math.sqrt(dx*dx + dy*dy);
+          const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 150) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 210, 255, ${0.15 * (1 - dist/150)})`;
+            ctx.strokeStyle = `rgba(0, 210, 255, ${0.15 * (1 - dist / 150)})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
